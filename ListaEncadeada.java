@@ -76,7 +76,7 @@ public class ListaEncadeada {
             System.out.println("NENHUMA CONTA FOI ADICIONADA!");
             return;
         }
-        
+
         while (atual != null){
             System.out.println(atual.conta.toString());
             atual = atual.proximo;

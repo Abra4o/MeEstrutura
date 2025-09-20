@@ -45,25 +45,52 @@ public class Contas {
         return titular;
     }
 
-    public void setAtiva(boolean ativa) {
+    private void setAtiva(boolean ativa) {
         this.ativa = ativa;
     }
 
-    //depositar
+    public void encerrarConta() {
+        if (this.saldo != 0) {
+            System.out.println("A CONTA AINDA CONTÉM DINHEIRO PARA SER ENCERRADA! Saque o saldo restante para encerrar a conta.");
+            return;
+        }
+        if (!this.ativa) {
+            System.out.println("A CONTA JÁ ESTÁ ENCERRADA!");
+            return;
+        }
+        setAtiva(false);
+        System.out.println("CONTA ENCERRADA COM SUCESSO!");
+    }
+
     public boolean depositar(double valor) {
-        if (!ativa || valor <= 0) {
+        if (!ativa) {
+            System.out.println("Depósito falhou: conta inativa.");
+            return false;
+        }
+        if (valor <= 0) {
+            System.out.println("Depósito falhou: valor inválido.");
             return false;
         }
         this.saldo += valor;
+        System.out.println("Depósito de " + valor + " realizado com sucesso. Saldo atual: " + this.saldo);
         return true;
     }
 
-    // sacar
     public boolean sacar(double valor) {
-        if (!ativa || valor <= 0 || this.saldo < valor) {
+        if (!ativa) {
+            System.out.println("Saque falhou: conta inativa.");
+            return false;
+        }
+        if (valor <= 0) {
+            System.out.println("Saque falhou: valor inválido.");
+            return false;
+        }
+        if (this.saldo < valor) {
+            System.out.println("Saque falhou: saldo insuficiente. Saldo atual: " + this.saldo);
             return false;
         }
         this.saldo -= valor;
+        System.out.println("Saque de " + valor + " realizado com sucesso. Saldo atual: " + this.saldo);
         return true;
     }
 
