@@ -45,6 +45,28 @@ public class Contas {
         return titular;
     }
 
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
+
+    //depositar
+    public boolean depositar(double valor) {
+        if (!ativa || valor <= 0) {
+            return false;
+        }
+        this.saldo += valor;
+        return true;
+    }
+
+    // sacar
+    public boolean sacar(double valor) {
+        if (!ativa || valor <= 0 || this.saldo < valor) {
+            return false;
+        }
+        this.saldo -= valor;
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Conta{" +
